@@ -5,5 +5,5 @@
 
 
 ##运行 
-1.node proxy.js  //运行代理跨域
-2.npm run dev
+*1.node proxy.js  //运行代理跨域
+*2.npm run dev
