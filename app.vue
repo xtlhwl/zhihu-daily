@@ -86,21 +86,27 @@
                 // https://news-at.zhihu.com/api/3/section/2
             //获取每日推荐
             getRecommendList(){
+                this.list = [];
                 this.isLoading = true;  //加载时设置为true，加载完成后设置为false
                 const prevDay = $.prevDay(this.dailyTime+86400000);
                 const beforeDay = prevDay-1;
+                //今天
                 $.ajax.get('4/news/before/'+prevDay)
                 .then(res =>{
                     this.recommendList.push(res)
                     this.isLoading = false;
                     console.log('这是recommendList',beforeDay,prevDay)
                 });
-                $.ajax.get('4/news/before/'+beforeDay)
-                .then(res =>{
-                    this.recommendList.push(res)
-                    this.isLoading = false;
-                    console.log('这是recommendList',beforeDay,prevDay)
-                })
+                // 前一天
+                // $.ajax.get('4/news/before/'+beforeDay)
+                // .then(res =>{
+                //     this.recommendList.push(res)
+                //     this.isLoading = false;
+                //     console.log('这是recommendList',beforeDay,prevDay)
+                // })
+                // console.log("这是长度"+this.recommendList.length)
+                
+                
             },
 
 
@@ -161,19 +167,23 @@
             this.getRecommendList();
 
             const $list = this.$refs.list;
-
+            if(this.recommendList.length === 0){
+                    this.dailyTime -= 86400000;
+                    this.getRecommendList();
+            };
             //滑动加载事件
             $list.addEventListener('scroll',() => {
                 if(this.type === 'daily' || this.isLoading) return;
+                
                 if(
-                    $this.scrollTop
+                    $list.scrollTop
                     +document.body.clientHeight 
                     >= $list.scrollHeight
                 ){
                     this.dailyTime -= 86400000;
                     this.getRecommendList();
                 }
-            })
+            });
             
             
         },
