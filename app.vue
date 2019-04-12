@@ -68,10 +68,13 @@
         methods:{
             //主题日报
             //获取主题日报分类
-            
-
-
-
+            getThemes(){
+                for(let i=1;i<10;i++){
+                    console.log(i)
+                    this.themes.push(i);
+                    
+                };
+            },
 
             //每日推荐
             //点击每日推荐事件
@@ -83,7 +86,7 @@
                 this.getRecommendList();
                 
             },
-                // https://news-at.zhihu.com/api/3/section/2
+
             //获取每日推荐
             getRecommendList(){
                 this.list = [];
@@ -104,20 +107,10 @@
                 //     this.isLoading = false;
                 //     console.log('这是recommendList',beforeDay,prevDay)
                 // })
-                // console.log("这是长度"+this.recommendList.length)
-                
-                
+                // console.log("这是长度"+this.recommendList.length)                
             },
 
-
-
-            getThemes(){
-                for(let i=1;i<10;i++){
-                    console.log(i)
-                    this.themes.push(i);
-                    
-                }
-            },
+ 
             //点击分类事件
             handleToTheme(id){
                 this.type = 'daily';  //颜色bar到了被点击的位置
@@ -162,7 +155,7 @@
         },
         mounted(){
             this.getThemes()
-
+            
             //自动加载
             this.getRecommendList();
 
@@ -183,9 +176,7 @@
                     this.dailyTime -= 86400000;
                     this.getRecommendList();
                 }
-            });
-            
-            
+            }); 
         },
         watch:{
             //点击分类bar变色事件
